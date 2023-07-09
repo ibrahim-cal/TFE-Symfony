@@ -1,0 +1,482 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} ULB {% endblock %}
+
+{% block body %}
+<style>
+.sidenav {
+  height: 100%;
+  width: 150px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #14396E;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+}
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+.main{
+  margin-left: 150px; /* Same as the width of the sidenav */
+}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+.panel {
+	margin : 10px;
+	padding : 10px;
+	float : left;
+	width : 60%;
+}
+.panel2
+{
+	margin-left : 10px;
+	padding-top : 10px;
+	width : 60%
+}
+</style>
+
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+<div class="sidenav">
+  <a href="/import"> Accueil </a>
+  <a href="/chercheur"> Chercheurs </a>
+  <a href="/mandats/form"> Mandats </a>
+  <a href="/patgsListe"> PATGS </a>
+  <a href="/stats"> Statistiques </a>
+  <a href="/MaJ"> MaJ inv. </a>
+  <a href="/covid"> Covid-19 </a>
+</div>
+
+
+<div class="main">
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<div class="example-wrapper">
+ 
+
+    <div class="panel panel-info">
+      <div class="panel-heading">Matricule : {{ chercheur.personidext }} - {{ chercheur.nom }} 
+      {{ chercheur.prenom }}</div>
+      <div class="panel-body">  </div>
+
+
+{#  Identifiant chercheur (inventaire) : {{selectAllChe.Idche}}  #}
+
+{%    if selectID ==0   %} 
+
+{%  else %}
+
+- Informations issues de l'inventaire -
+</br>  
+Identifiant du chercheur :  {{selectID}}  
+   </br>   
+
+
+
+
+{#    ********       AFFICHAGE UNITE+  RESPONSABILITE + PROJETS (INVENTAIRE)  *********    #}
+
+{%    if selectUcompos is empty  %} 
+
+{%  else %}
+
+Unite de travail : 
+
+{% for UniteChercheur in selectUcompos %}
+
+  {{  UniteChercheur.Refunite}}  
+
+{%    if UniteChercheur.Responsable=="Non"   %}
+(pas responsable)
+
+{%    elseif UniteChercheur.Responsable=="Oui" %}
+(est responsable)
+{%    endif    %}
+
+ </br>
+ {%  endfor %}
+ {% endif %}
+
+
+
+{%    if selectProjResp is empty  %} 
+
+{%  else %}
+
+Projet :
+{% for ProjetChercheur in selectProjResp %}
+
+ Projet : {{  ProjetChercheur.RefProj}} - Ordre :  {{  ProjetChercheur.Ordre}} 
+
+ </br>
+{%  endfor %}
+<br />
+{%    endif    %}
+
+
+
+{%    endif    %}
+
+
+
+
+
+
+{#    ********                           INFOS BDD IBRAHIM                     *********    #}
+<br />
+- Informations issues de BDD Base_Agent -
+<br />
+Nom : {{ chercheur.Nom }}
+<br />
+
+{%    if chercheur.nompref is empty or null   %}
+	
+
+{%    else  %}
+	Nom préférentiel : {{ chercheur.nompref }}
+	<br />
+{%    endif    %}
+
+
+
+Prénom : {{ chercheur.Prenom }}
+<br />
+
+
+{%    if chercheur.prenompref is empty or null  %}
+
+	
+{%    elseif  chercheur.prenompref is defined  %}
+	Prénom préférentiel : {{ chercheur.prenompref }}
+	<br />
+{%    endif    %}
+
+
+
+
+{%    if chercheur.fkagentfonction is empty or  null   %}
+
+
+{%    elseif  chercheur.fkagentfonction is defined  %}
+	Fonction	:  {{ chercheur.fkagentfonction }}
+	<br />
+{%    endif    %}
+
+
+
+
+{%    if chercheur.fkunit is empty  %}
+
+	
+{%    elseif  chercheur.fkunit is defined  %}
+	Unité : {{ chercheur.fkunit }}
+	<br />
+{%    endif    %}
+
+
+
+
+{%    if chercheur.fkagentservice is empty or null   %}
+
+	
+{%    elseif  chercheur.fkagentservice is defined  %}
+	Service : {{ chercheur.fkagentservice }}
+	<br />
+{%    endif    %}
+
+
+
+
+
+
+
+{%    if chercheur.fkagentcpi is empty or null   %}
+
+
+{%    elseif  chercheur.fkagentcpi is defined  %}
+	CPI: {{ chercheur.fkagentcpi }}
+	<br />
+{%    endif    %}
+
+
+
+{%    if chercheur.doc is empty or null   %}
+	
+
+{%    elseif  chercheur.doc is defined  %}
+	Diplôme de doctorat : Oui
+	<br />
+{%    endif    %}
+
+</div>
+
+
+   <div class="panel2 panel-info">
+      <div class="panel-heading"> Mandats : {{mandat|length}} </div>
+      <div class="panel-body"> </div>
+    
+
+{% for test in mandat %}
+
+
+
+
+
+<div class="container">
+  <h4>                     </h4>
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal{{  test.pernr}}">      N° mandat : {{  test.pernr}}     </button>
+
+
+
+
+  <!-- ********    Modal       -->
+  <div class="modal fade" id="myModal{{test.pernr}}" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+       		 <div class="modal-header">
+         		 <button type="button" class="close" data-dismiss="modal">&times;</button>
+         		 <h4 class="modal-title">
+
+        		  N° mandat : {{  test.pernr}}
+         			 </h4>
+       		</div>
+
+        <div class="modal-body">
+
+          <p>
+
+
+{%    if test.fkansvh is empty or null   %} 
+{%    elseif  test.fkansvh is defined  %}
+	Type de contrat : {{  test.fkansvh}}
+	<br />
+{%    endif    %}
+
+
+
+Domaine : {{  test.fkwerks}}
+<br />
+
+Sous-domaine : {{  test.fkbtrtl}}
+<br />
+
+Categorie : {{  test.fkpersg}}
+<br />
+
+PATGS :  {{  test.fkpersk}}
+<br />
+
+
+
+{%    if test.fkzzrepgrade is empty or null   %}
+
+{%    elseif  test.fkzzrepgrade is defined  %}
+	Grade : {{  test.fkzzrepgrade}} 
+	<br />
+{%    endif    %}
+
+
+
+{%    if test.fkzzacadecran is empty or null   %}
+
+{%    elseif  test.fkzzacadecran is defined  %}
+	Statut académique :  {{  test.fkzzacadecran}}
+	<br />
+{%    endif    %}
+
+
+
+
+Date de début d'affectation : {{  test.begda|date('d-m-Y')  }}
+<br />
+
+
+
+Date de fin d'affectation : {{  test.endda|date('d-m-Y') }}
+<br />
+
+
+
+
+
+{%    if test.termn is empty or null   %}
+	
+{%    elseif  test.termn is defined  %}
+	Date d'échéance pension : {{  test.termn|date('d-m-Y')  }}
+	<br />
+{%    endif    %}
+
+
+
+
+
+{%    if test.pa0016begda is empty or null   %}
+
+{%    elseif  test.pa0016begda is defined  %}
+	Date de début de contrat : {{  test.pa0016begda|date('d-m-Y')  }}
+	<br />
+{%    endif    %}
+
+
+
+
+
+{%    if test.pa0016ctedt is empty or null   %}
+
+{%    elseif  test.pa0016ctedt is defined  %}
+	Date de fin de contrat : {{  test.pa0016ctedt|date('d-m-Y')  }}
+	<br />
+{%    endif    %}
+
+
+
+
+
+{%    if test.zzchargehadm ==0   %}
+
+{%    elseif  test.zzchargehadm is defined  %}
+	Charge horaire de cours administré : {{  test.zzchargehadm}}
+	<br />
+{%    endif    %}
+
+
+
+
+
+{%    if test.zzchargehocc ==0  %}
+	
+{%    elseif  test.zzchargehocc is defined  %}
+	Charge horaire de cours administré (comptabilisant en plus les travaux de recherche ou préparation ) : {{  test.zzchargehocc}}
+	<br />
+{%    endif    %}
+
+
+
+
+
+{%    if test.ids ==0 %}
+
+{%    elseif  test.ids is defined  %}
+Identifiant du poste : {{  test.ids}}
+	<br />
+{%    endif    %}
+
+
+
+
+
+{%    if test.ido ==0  %}
+
+{%    elseif  test.ido is defined  %}
+	Identifiant de l'entité (service) : {{  test.ido}}
+	<br />
+{%    endif    %}
+
+
+
+
+
+{%    if test.etpadminposte ==0  %}
+
+{%    elseif  test.etpadminposte is defined  %}
+	L'équivalent temps plein administratif du poste : {{  test.etpadminposte}}
+	<br />
+{%    endif    %}
+
+
+
+
+
+
+{%    if test.etpoccposte ==0 %}
+
+{%    elseif  test.etpoccposte is defined  %}
+	L'occupation du poste (le % temps financé pour la fonction en question) : {{  test.etpoccposte}}
+	<br />
+{%    endif    %}
+
+
+
+
+{%    if test.affectetpserv ==0   %}
+	
+{%    elseif  test.affectetpserv is defined  %}
+Fraction d'équivalent temps plein administratif affectée à un service via une relation : {{  test.affectetpserv}}
+	<br />
+{%    endif    %}
+
+
+
+
+{%    if test.relation ==0  %}
+
+{%    elseif  test.relation is defined  %}
+Relation d'affectation dans le service :  {{  test.relation}}
+	<br />
+{%    endif    %}
+
+
+
+
+Date de mise à jour / d'introduction dans Excel : {{  test.aedtm|date('d-m-Y') }}
+<br />
+
+		</p>
+
+
+        </div>
+
+       			 <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal"> Fermer </button>
+       			 </div>
+      </div>
+      
+    </div>
+  </div>
+
+</div>
+
+
+
+
+				<!-- ********   FIN DU  MODAL      -->
+ {%  endfor %}
+
+
+
+</div>
+
+</div>
+    </div>
+
+
+
+</div>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,344 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} ULB {% endblock %}
+
+
+{% block body %}
+<style>
+
+
+.sidenav {
+  height: 100%;
+  width: 150px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #14396E;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main{
+  margin-left: 160px; /* Same as the width of the sidenav */
+  margin-top : 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+td, th {
+width: 20%;
+}
+
+form{
+  margin: 8px;
+}
+
+
+</style>
+
+
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+
+
+<div class="sidenav">
+  <a href="/import"> Accueil </a>
+  <a href="/chercheur"> Chercheurs </a>
+  
+  <a href="/mandats/form"> Mandats </a>
+  <a href="/patgsListe"> PATGS </a>
+   <a href="/stats"> Statistiques </a>
+   <a href="/MaJ"> MaJ inv. </a>
+  <a href="/covid"> Covid-19 </a>
+</div>
+
+<div class="main">
+
+
+
+Résultats trouvés contenant "{{motCle}}"
+ </br>
+
+
+
+
+
+{#********** ***********       Affichage WERKS domaine       ***********#}
+
+{%    if WERKS is not empty   %} 
+</br>
+ <table class="table table-hover">
+  <tr>
+   <th>  Nom de domaine    </th>
+    
+  </tr>
+
+{% for nomDomaine in WERKS %}
+  <tr>
+
+    <td>    {{  nomDomaine.WERKS}}   </td>
+ 
+   {%  endfor %}
+ </tr>
+</table>
+
+{%    endif    %}
+
+
+
+
+{#********** ***********       Affichage TYPES MANDATS          ***********#}
+
+{%    if TypeMandat is not empty   %} 
+
+</br>
+ <table class="table table-hover">
+  <tr>
+   <th> Types de mandats    </th>
+
+  </tr>
+
+{% for Type in TypeMandat %}
+  <tr>
+
+    <td>     {{  Type.ANSVH}}  -   {{  Type.AnsvhLib}}      </td>
+ 
+
+   {%  endfor %}
+ </tr>
+</table>
+
+{%    endif    %}
+
+  
+
+
+
+
+{#********** ***********       Affichage  UNTES         ***********#}
+
+
+{%    if Unit is not empty   %} 
+
+</br>
+ <table class="table table-hover">
+  <tr>
+   <th> Unités    </th>
+
+  </tr>
+
+{% for NomUnite in Unit %}
+  <tr>
+
+    <td>     {{  NomUnite.IDUNIT}}  -   {{  NomUnite.IDUNITTXT}}      </td>
+ 
+
+   {%  endfor %}
+ </tr>
+</table>
+
+{%    endif    %}
+
+
+
+
+
+
+{#********** ***********       Affichage  patgs         ***********#}
+
+
+{%    if patgs is not empty   %} 
+
+</br>
+ <table class="table table-hover">
+  <tr>
+   <th> Statuts    </th>
+
+  </tr>
+
+{% for Nompatgs in patgs %}
+  <tr>
+
+    <td>      {{  Nompatgs.PERSK}}  -   {{  Nompatgs.PERSKLIB}}        </td>
+
+   {%  endfor %}
+ </tr>
+</table>
+
+{%    endif    %}
+
+
+
+
+
+ {#********** ***********       Affichage GradeRepresentation        ***********#}
+
+{%    if GradeRepresentation is not empty   %} 
+
+</br>
+ <table class="table table-hover">
+  <tr>
+   <th>Grades </th>
+
+  </tr>
+{% for NomGradeRepresentation in GradeRepresentation %}
+  <tr>
+
+    <td>     {{  NomGradeRepresentation.ZZREPGRADE}}  -   {{  NomGradeRepresentation.ZZREPGRADETXT}}        </td>
+
+   {%  endfor %}
+ </tr>
+</table>
+
+{%    endif    %}
+
+
+
+
+
+ {#********** ***********       Affichage  Categories        ***********#}
+
+
+{%    if  Categories is not empty   %} 
+
+</br>
+ <table class="table table-hover">
+  <tr>
+   <th> Categories </th>
+
+  </tr>
+{% for NomCategories in  Categories %}
+  <tr>
+
+    <td>    {{  NomCategories.PERSG}}  -   {{  NomCategories.PERSGLIB}}       </td>
+
+   {%  endfor %}
+ </tr>
+</table>
+
+{%    endif    %}
+
+
+
+
+ {#********** ***********       Affichage  BTRTL        ***********#}
+
+{%    if  Categories is not empty   %} 
+
+</br>
+ <table class="table table-hover">
+  <tr>
+   <th> Sous-domaine </th>
+
+  </tr>
+{% for Nombtrtl in  btrtl %}
+  <tr>
+
+    <td>  {{  Nombtrtl.BTRTL}}      </td>
+
+   {%  endfor %}
+ </tr>
+</table>
+
+{%    endif    %}
+
+
+
+
+
+  {#********** ***********       Affichage  Agent Service      ***********#}
+
+
+{%    if  agentService is not empty   %} 
+
+</br>
+ <table class="table table-hover">
+  <tr>
+   <th> Service administratif </th>
+
+  </tr>
+{% for NomAgentService in  agentService %}
+  <tr>
+
+    <td>  {{  NomAgentService.SHORTSERV}}   -  {{  NomAgentService.LONGSERV}}     </td>
+
+   {%  endfor %}
+ </tr>
+</table>
+
+{%    endif    %}
+
+
+
+
+  {#********** ***********       Affichage  agentFonction       ***********#}
+
+
+{%    if  agentFonction is not empty   %} 
+
+</br>
+ <table class="table table-hover">
+  <tr>
+   <th> Fonction </th>
+
+  </tr>
+{% for NomAgentFonction in  agentFonction %}
+  <tr>
+
+    <td>  {{  NomAgentFonction.ZZGRADE}}   -  {{  NomAgentFonction.ZZGRADETXT}}     </td>
+
+   {%  endfor %}
+ </tr>
+</table>
+
+{%    endif    %}
+
+
+
+
+
+
+  {#********** ***********       Affichage  agentCpi       ***********#}
+
+
+{%    if  agentCpi is not empty   %}
+
+</br>
+ <table class="table table-hover">
+  <tr>
+   <th> Code postal interne </th>
+
+  </tr>
+{% for NomAgentCpi in  agentCpi %}
+  <tr>
+
+    <td>  {{  NomAgentCpi.CPISERV }}   -  {{  NomAgentCpi.CPISERVLIBEL}}  -  {{  NomAgentCpi.CPISERVCAMPUS}}      </td>
+
+   {%  endfor %}
+ </tr>
+</table>
+
+{%    endif    %}
+
+
+
+
+</div>
+{% endblock %}

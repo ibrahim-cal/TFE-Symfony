@@ -1,0 +1,149 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} ULB {% endblock %}
+
+{% block body %}
+<style>
+
+.h6
+{
+  color : #054886;
+}
+.sidenav {
+  height: 100%;
+  width: 150px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #14396E;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+}
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+.main{
+  margin-left: 160px; /* Same as the width of the sidenav */
+  margin-top : 10px;
+}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+td, th {
+width: 20%;
+}
+
+.form-group
+{
+  width : 30%;
+}
+</style>
+
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+
+<div class="sidenav">
+  <a href="/import"> Accueil </a>
+  <a href="/chercheur"> Chercheurs </a>
+   <a href="/mandats/form"> Mandats </a>
+    <a href="/stats"> Statistiques </a>
+    <a href="/MaJ"> MaJ inv. </a>
+     <a href="/patgsListe"> PATGS </a>
+<a href="/covid"> Covid-19 </a>
+</div>
+
+
+<div class="main">
+
+
+
+
+{# *****************     ENREGISTRER       NOUVEAU        PATGS  ********#}
+
+     <p class="h6">  Vous pouvez enregistrer un nouveau statut en remplissant le formulaire </p>
+
+ <form action="/patgsInsert" method="post">
+  <div class="form-group">
+
+    <label for="nom"> Code statut </label>
+
+    <input type="text" name="PERSK" class="form-control" id="persk" aria-describedby="emailHelp" placeholder="BO, BT, ..." value="" required>
+  
+     <input type="hidden" value="" name="persk" >
+   
+  </div>
+  </br>
+  <div class="form-group">
+    <label for="persklib"> Libellé statut </label>
+    <input type="text" name="PERSKLIB" class="form-control" id="persklib" placeholder="Boursier doctorant, Boursier tiers, ..." value="" required>
+
+  </div>
+
+ </br>
+  <button type="submit" class="btn btn-secondary"> Enregistrer </button>
+
+</form>
+
+<hr>
+
+</br>
+
+
+
+
+
+{# **********************  LISTE   PATGS AVEC BOUTTON SUPPRIMER ********#}
+
+<p class="h6"> Liste des différents statuts en rapport avec le personnel de type administratif, technique, de gestion ou spécialisé de l’ULB</p>
+
+<table class="table table-hover">
+  <tr>
+    <th> Code statut </th>
+    <th> Libellé </th>
+
+  </tr>
+
+     {% for PATGS in allPATGS %}
+  <tr>
+
+  <td>{{  PATGS.PERSK}}  </td>
+    <td>{{  PATGS.PERSKLIB}}  </td>
+
+      
+         <td> 
+         <form action="patgsSupprimer" method="post">
+
+         <input type="hidden" value="{{PATGS.PERSK}}" name="PERSK">
+
+          <button type="submit" name="PERSK"  value="{{PATGS.PERSK}}" class="btn btn-outline-danger" btn-sm"
+          > Supprimer </button>
+
+
+         </form>
+
+         </td>
+    
+   {%  endfor %}
+ </tr>
+
+</table>
+
+
+
+
+
+</div>
+
+</div>
+
+{% endblock %}

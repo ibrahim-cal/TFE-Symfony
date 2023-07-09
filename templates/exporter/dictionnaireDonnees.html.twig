@@ -1,0 +1,234 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %} ULB {% endblock %}
+
+
+{% block body %}
+<style>
+
+
+.sidenav {
+  height: 100%;
+  width: 150px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #14396E;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main{
+  margin-left: 160px; /* Same as the width of the sidenav */
+  margin-top : 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+td, th {
+width: 20%;
+}
+
+form{
+  margin: 8px;
+}
+
+</style>
+
+
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+
+
+<div class="sidenav">
+  <a href="/import"> Accueil </a>
+  <a href="/chercheur"> Chercheurs </a>
+  
+  <a href="/mandats/form"> Mandats </a>
+  <a href="/patgsListe"> PATGS </a>
+  <a href="/MaJ"> MaJ inv. </a>
+  <a href="/covid"> Covid-19 </a>
+</div>
+
+<div class="main">
+
+
+
+
+ </br>
+
+Voici le dictionnaire des données des tables
+</br>
+</br>
+ </br>
+
+ <strong>  Academique  </strong>: reprend la liste des différents statuts en rapport avec le personnel académique de l’ULB.<br>
+ZZACAD_ECRAN : code du statut académique. Exemples : AA, AE…<br>
+ZZACAD_TXT_AUTO : libellé du statut académique. Exemples : Académique, Académique étendu…<br>
+
+<br>
+<br>
+
+
+
+ <strong>  Agent_Cpi  </strong>: reprend la liste des codes postaux internes des différents services de l’ULB. Ce qui permet une localisation géographique pour la gestion du courrier et une localisation au niveau du campus.<br>
+CPI_SERV : code postal interne. Exemples : 101, 104, 220…<br>
+CPI_SERV_LIBEL : libellé du code postal. Exemples : Institut de Sociologie, Département des relations extérieures…<br>
+CPI_SERV_CAMPUS : le campus sur lequel le CPI se trouve, représenté par une seule lettre.<br>
+
+
+
+<br>
+<br>
+
+
+
+ <strong>  Agent_Fonction  </strong>: contient la liste des différentes fonctions.<br>
+ZZGRADE : acronyme de la fonction. Exemples : AEX, ASP…<br>
+ZZGRADE_TXT : nom complet. Exemples : assistant de Recherche externe, assistant scientifique…<br>
+
+
+
+
+ <strong>  Agent_Service  </strong>: reprend la liste des différents services administratifs.<br>
+SHORT_SERV : code, acronyme du service. Exemples : XP50A, XP30A…<br>
+LONG_SERV : nom du service. Exemples : médecine du travail, droit familial…<br>
+LIBEL_SERV : informations complémentaires plus détaillées du service.<br>
+
+
+
+<br>
+<br>
+
+
+
+ <strong>  Base_Agent_Adresse </strong> : reprend la liste des personnes travaillant à l’ULB.<br>
+PERSONID_EXT : numéro identifiant unique de la personne.<br>
+ZRSZRR : numéro d’identification à la sécurité sociale.<br>
+Prenom : prénom de la personne.<br>
+Prenom_pref : prénom préférentiel de la personne.<br>
+Nom : nom de la personne.<br>
+Nom_pref : nom préférentiel de la personne.<br>
+Doc : indique la présence d’un diplôme de doctorat grâce à une lettre « X ».<br>
+
+
+<br>
+<br>
+
+
+ <strong>  BTRTL </strong> : contient la liste des vingt-six sous-domaines de travail.<br>
+BTRTL : acronyme du sous-domaine. Exemples : CFO, BNR…<br>
+Nom_sous_domaine : nom complet du sous-domaine.<br>
+
+<br>
+<br>
+
+ <strong>  Categories </strong> : reprend la liste des différentes catégories du personnel au niveau de leur contrat en cours.<br>
+PERSG : code de la catégorie sous forme d’un chiffre ou d’une lettre. Exemples : E, 7…<br>
+PERSGLIB : libellé de la catégorie. Exemples : externe, pensionné…<br>
+sorti : état du mandat. Exemples : 0 pré-actif, 1 actif, 2 personnel de tiers…<br>
+
+Son utilité serait d’éventuellement sélectionner tous les mandats qui peuvent être de catégories différentes mais avec une valeur « sorti » commune.<br>
+
+<br>
+<br>
+
+
+ <strong>  Grade_Representation  </strong>: reprend la liste des différents grades.<br>
+ZZREPGRADE : code du grade de représentation sous forme d’acronyme. Exemple : DSE.<br>
+ZZREPGRADE_TXT : libellé du grade de représentation. Exemple : Directeur de Service.<br>
+
+
+<br>
+<br>
+
+
+
+ <strong>  Localite  </strong>: reprend la liste des différents codes postaux et localités.<br>
+Id_Localite : clé primaire auto-incrémentée.<br>
+CodePostal : code postal.<br>
+Localite : localité correspondant au code postal.<br>
+SousCommune : reprend « oui » ou « non » comme valeur.<br>
+CommunePrincipale : reprend le nom de la commune principale. Exemple : Saintes, Tubize, Clabecq sont des localités différentes mais auront Tubize pour commune principale.<br>
+Province : reprend le nom de la province. Exemples : Brabant wallon, Flandre orientale…<br>
+
+<br>
+<br>
+
+
+ <strong>  Mandats  </strong>: reprend la liste des mandats que peut avoir une personne.<br>
+PERNR : numéro identifiant unique du mandat.<br>
+BEGDA : date de début d’affectation.<br>
+ENDDA : date de fin d’affectation.<br>
+TERMN : date d’échéance pension si la personne a un contrat du type CDI.<br>
+PA0016_BEGDA : date de début de contrat.<br>
+PA0016_CTEDT : date de fin de contrat.<br>
+ZZCHARGE_H_ADM : il s’agit de la charge horaire de cours administrée pour les assistants, les chargés de cours, les maîtres de conférences, etc., et les membres du corps académique.<br>
+Correspond aux heures de cours ou assimilées. Les heures de préparation de cours sont gérées autrement en faculté et pas par l’administration centrale de l’ULB.<br>
+ZZCHARGE_H_OCC : sensiblement la même valeur que « ZZCHARGE_H_ADM ». Sauf dans de très rares cas où le temps réel d’occupation officielle est différent pour des raisons de Recherche. Avec en plus les heures prestées pour des travaux de Recherche ou préparations qui seraient liées aux cours principalement.<br>
+ID_S : identifiant du poste sous forme de chiffres.<br>
+ID_O : identifiant de l’entité sous forme de chiffres.<br>
+ETP_ADMIN_POSTE : exprimé en pourcents, l’équivalent temps plein administratif du poste. Certaines fonctions étant spéciales ou honorifiques, il y a lieu de distinguer le temps occupé par la fonction et le temps financé pour cette fonction.<br>
+ETP_OCC_POSTE : exprimé en pourcents, l’occupation financée du poste.  Le pourcentage du temps financé pour la fonction en question.<br>
+On aura, par exemple, Conseiller du recteur ETP_ADMIN_POSTE = 20 % et ETP_OCC_POSTE = 00 % car cette fonction n’est pas financée.<br>
+Cette information est liée au 1er mandat de cette personne.<br>
+AFFECT_ETP_SERV : exprimé en pourcents, fraction d’équivalent temps plein administratif affectée à un service via une relation.<br>
+Relation : relation d’affectation dans le service sous forme de codes. Exemples : 003, ZAI…<br>
+Explication : 012 signifie être chef de service, ZAO concerne une personne à réaffecter…<br>
+AEDTM : indique la date de mise à jour ou d'introduction de la ligne dans le fichier Excel.<br>
+
+<br>
+<br>
+
+ <strong>  PATGS  </strong>: reprend la liste des différents statuts en rapport avec le personnel de type administratif, technique, de gestion ou spécialisé de l’ULB.<br>
+PERSK : statut sous forme d’abréviation. Exemples : SN, SH…<br>
+PERSKLIB : libellé du statut. Exemples : scientifique non-rémunéré, scientifique hospitalier…<br>
+
+
+<br>
+<br>
+
+
+ <strong>  Types_Mandat </strong>: reprend la liste des différents types de contrats. Exemples : durée limitée, CDD, CDI contractuel…<br>
+ANSVH : reprend la liste des différents types de contrat sous forme de code chiffré.<br>
+ansvh_lib : reprend les noms de contrats.<br>
+
+
+<br>
+<br>
+
+
+
+ <strong>  Unit  </strong>: reprend les informations sur les différentes Facultés/Instituts/Ecoles/Entités effectuant des missions de Recherche à l’ULB.<br>
+IDUNIT : code de la faculté sous forme de chiffres ou de lettres.<br>
+IDUNIT_TXT : nom complet de la faculté.<br>
+
+<br>
+<br>
+
+ <strong>  WERKS </strong>: reprend la liste des différents domaines de travail au sein de l’université.<br>
+WERKS : reprend le domaine sous forme d’acronyme. Exemples : ULB, FNRS…<br>
+Nom_domaine : reprend le libellé du nom complet du domaine. Exemples : Université libre de Bruxelles, Fonds National de la Recherche Scientifique…<br>
+
+
+
+</div>
+{% endblock %}

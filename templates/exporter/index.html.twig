@@ -1,0 +1,187 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Exporter tables {% endblock %}
+
+{% block body %}
+<style>
+
+
+
+.h5
+{
+  color : #054886;
+}
+
+
+
+</style>
+
+<div class="example-wrapper">
+
+</div>
+<div class="main">
+
+
+<p class="h5"> Vous pouvez télécharger un fichier Excel contenant les données des tables </p>
+
+
+</br>
+
+
+Pour avoir des informations détaillées des tables, vous pouvez télécharger le dictionnaire de données 
+
+<form action="" method="post">
+<div class="input-group">
+  
+  <button formaction="/pdfDD" class="btn btn-outline-secondary btn-sm"> Dict. données Pdf</button>
+
+</div>
+</form>
+</br>
+
+
+
+
+
+ <table class="table table-hover">
+  <tr>
+   <th> Tables </th>
+    <th> Exporter les données en fichier Excel </th>
+   
+
+    <tr>
+     <td>    Academique  </td>   
+     <td> 
+
+	<form action="" method="post">
+      <button formaction="/excelAcad" class="btn btn-outline-secondary btn-sm"> Exporter </button>
+	</form>
+      </td> 
+	</tr>
+
+
+    <tr> <td>  Agent_Cpi    </td>  
+     <td> 
+     <form action="" method="post">
+      <button formaction="/excelCpi" class="btn btn-outline-secondary btn-sm"> Exporter </button>
+	</form>
+      </td> 
+	</tr>
+
+
+    <tr> <td>  Agent_Fonction    </td>  
+     <td> 
+     <form action="" method="post">
+      <button formaction="/excelFonction" class="btn btn-outline-secondary btn-sm"> Exporter </button>
+	</form>
+      </td> 
+	</tr>
+
+
+    <tr> <td>   Agent_Service   </td>  
+     <td> 
+     <form action="" method="post">
+      <button formaction="/excelService" class="btn btn-outline-secondary btn-sm"> Exporter </button>
+	</form>
+      </td> 
+	</tr>
+
+
+
+
+    <tr> <td>   Base_Agent_Adresse  </td>  
+     <td> 
+     <form action="" method="post">
+      <button formaction="/excelBaseAgentAdresse" class="btn btn-outline-secondary btn-sm"> Exporter </button>
+	</form>
+      </td> 
+	</tr>
+
+
+
+
+    <tr> <td>   BTRTL   </td>  
+     <td> 
+     <form action="" method="post">
+      <button formaction="/excelBTRTL" class="btn btn-outline-secondary btn-sm"> Exporter </button>
+	</form>
+      </td> 
+	</tr>
+
+
+    <tr> <td>    Categories  </td>  
+     <td> 
+     <form action="" method="post">
+      <button formaction="/excelCategories" class="btn btn-outline-secondary btn-sm"> Exporter </button>
+	</form>
+      </td> 
+	</tr>
+
+
+    <tr> <td>    Grade_representation  </td>  
+     <td> 
+     <form action="" method="post">
+      <button formaction="/excelGradeRepresentation" class="btn btn-outline-secondary btn-sm"> Exporter </button>
+	</form>
+      </td> 
+	</tr>
+
+
+
+
+   <tr> <td>   Mandats  </td>  
+     <td> 
+     <form action="" method="post">
+      <button formaction="/excelMandats" class="btn btn-outline-secondary btn-sm"> Exporter </button>
+	</form>
+      </td> 
+	</tr>
+
+
+
+
+
+
+    <tr> <td>  PATGS    </td>  
+     <td> 
+     <form action="" method="post">
+      <button formaction="/excelPATGS" class="btn btn-outline-secondary btn-sm"> Exporter </button>
+	</form>
+      </td> 
+	</tr>
+
+
+    <tr> <td>  Types_mandats     </td>  
+     <td> 
+     <form action="" method="post">
+      <button formaction="/excelTypesMandats" class="btn btn-outline-secondary btn-sm"> Exporter </button>
+	</form>
+      </td> 
+	</tr>
+
+
+    <tr> <td>  Unit     </td>  
+     <td> 
+     <form action="" method="post">
+      <button formaction="/excelUnit" class="btn btn-outline-secondary btn-sm"> Exporter </button>
+	</form>
+      </td> 
+	</tr>
+
+
+      <tr> <td>  WERKS     </td>  
+       <td> 
+       <form action="" method="post">
+        <button formaction="/excelWERKS" class="btn btn-outline-secondary btn-sm"> Exporter </button>
+	</form>
+        </td> 
+	</tr>
+
+
+
+</table>
+
+
+
+</div>
+{% endblock %}

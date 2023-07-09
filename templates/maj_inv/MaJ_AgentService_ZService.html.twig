@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<style>
+
+form
+{
+  margin : 5px;
+}
+</style>
+
+
+
+<div class="main">
+
+BDD_PERSO_ULB {{ AllAgentService | length  }} enregistrements
+</br>
+
+Inventaire {{ AllZServicecAsc | length  }} enregistrements 
+
+</br>
+</br>
+
+{# ***********    BOUTON      MISE    A      JOUR      INVENTAIRE   **********#}
+    <form action="/MaJ_AgentService_ZService_REQUETE" method="post">
+             <input type="hidden" value="" name="AgentService">
+             <button type="submit" name="AgentService"  value="" class="btn btn-outline-success" btn-sm"
+             >  Remplir inventaire </button>
+             </form>
+
+
+
+  <form action="/excelZService" method="post">
+      <button formaction="excelZService" class="btn btn-outline-secondary btn-sm"> Exporter ZService </button>
+  </form>
+
+
+
+{# ***********        AFFICHAGE        LISTE     Agent Service     ********** #}
+
+<table class="table table-hover">
+ <th colspan="3">BDD_PERSO_ULB</th>
+ <caption>   BDD_PERSO_ULB </caption
+  <tr>
+    <th>SHORTSERV    </th>
+    <th>LIBELSERV    </th>
+     <th>LONGSERV    </th>
+
+  </tr>
+
+     {% for AgentService in AllAgentService %}
+  <tr>
+      <td> {{  AgentService.SHORTSERV}}  </td>
+     <td>{{  AgentService.LIBELSERV}}  </td>
+      <td>{{  AgentService.LONGSERV}}  </td>
+ 
+    
+ </tr>
+ {%  endfor %}
+</table>
+
+
+
+
+
+{# ***********        AFFICHAGE        LISTE    ZService    **********#}
+
+<table class="table table-hover">
+
+  {%   if AllZServicecAsc is empty  %}
+ La table ZService est vide
+ {% else %}
+
+ <th colspan="3">Inventaire </th>
+  <caption>   Inventaire </caption
+
+  <tr>
+    <th>SHORTSERV    </th>
+    <th>SHORTSERV    </th>
+     <th>LIBELSERV    </th>
+
+  </tr>
+
+     {% for ZService in AllZServicecAsc %}
+  <tr>
+
+    <td>  {{  ZService.SHORTSERV}}  </td>
+    <td>{{  ZService.LONGSERV}}  </td>
+    <td>{{  ZService.LIBELSERV}}  </td>
+  
+ </tr>
+ {%  endfor %}
+</table>
+
+{% endif %}
+
+
+
+
+</div>
+{% endblock %}

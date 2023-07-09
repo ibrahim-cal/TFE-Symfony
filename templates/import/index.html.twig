@@ -1,0 +1,452 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ImportController!{% endblock %}
+
+{% block body %}
+<style>
+
+ .h1{
+  display : block;
+text-align : center;
+color : #054886;
+border: solid 1px #054886;
+}
+
+.h5, .h6
+{
+  color : #054886;
+}
+
+
+
+
+
+    form {
+ display: inline-block;
+ padding : 4px;
+ margin : 4px;
+ }
+
+.form-control {
+  width : 50%;
+}
+
+.half-rule { 
+  text-align : center;
+    width: 22%;
+ }
+
+.sidenav {
+  height: 100%;
+  width: 150px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #14396E;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+.main{
+  margin-left: 155px; /* Same as the width of the sidenav */
+}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+
+<div class="sidenav">
+  <a href="/import"> Accueil </a>
+  <a href="/chercheur"> Chercheurs </a>
+  <a href="/mandats/form"> Mandats </a>
+  <a href="/patgsListe"> PATGS </a>
+  <a href="/stats"> Statistiques </a>
+  <a href="/MaJ"> MaJ inv. </a>
+  <a href="/covid"> Covid-19 </a>
+</div>
+
+<div class="main">
+
+</br>
+  <p class="h1">  Inventaire de la Recherche  </p>
+
+</br>
+
+</br>
+
+
+{#    *********************             MOTEUR RECHERCHE                 ***********   #}
+
+<p class="h6"> Sur base d'un mot, les résultats de toutes les sections contenant les caractères introduits sont affichés. </br>
+Exemples : Fac, Faculté, Hop, Scientifique, Pension, ... </p>
+<form action="/moteur" method="post">
+<div class="input-group">
+
+  <input type="text" name="moteur"  class="recherche"" placeholder=" saisir un mot-cl&eacute; "   aria-label="rechercher"
+    aria-describedby="search-addon" />
+
+
+  <input type="submit" value="Voir résultats" class="btn btn-outline-secondary btn-sm"/> 
+  
+  <button formaction="/pdfMoteurMotCle" class="btn btn-outline-secondary btn-sm"> Générer PDF des résultats </button>
+
+</div>
+</form>
+
+
+
+
+</br>
+
+
+
+
+{#
+{%    if x == 1   %}
+<div class="alert alert-warning" role="alert">
+ Aucune correspondance pour ce matricule.
+</div>
+
+  <br />
+{%    endif    %}
+
+#}
+</br>
+
+
+<hr class="half-rule"/>
+
+         <p class="h5">  Veuillez selectionner un fichier .CSV  pour 
+         pouvoir effectuer l'import de la table de votre choix </p>
+
+{# *************************               ACADEMIQUE          ******************** #}
+
+ <form enctype="multipart/form-data" action="/academique" method="post">
+        <div class="input-row" >
+            <label class="col-md-4 control-label"><br/> <br/> 
+               <strong> Academique</strong>
+                 remplissage <br/> {{compteurAcademique|length}} / 2
+                </label>
+               <br /><br />
+             
+               <input type="file"   name="file[]" id="file" accept=".csv" multiple>
+
+               <br />
+               <br />
+                          <button type="submit"  id="submit" name="academique"    class="btn btn-outline-secondary btn-sm"> Remplir  </button>
+               <br />
+           </div>
+       </form>
+
+
+
+
+
+
+
+
+
+{# *************************                AGENT CPI        ********************* #}
+
+       <form enctype="multipart/form-data" action="/agent/cpi" method="post">
+        <div class="input-row">
+            <label class="col-md-4 control-label"><br/> <br/> 
+               <strong>    Agent_Cpi</strong>
+                  remplissage <br/> {{compteurAgentCpi|length}} / 294
+                </label>
+               <br/><br/>
+               <input type="file" name="file[]" id="file" accept=".csv" multiple>
+               <br/>
+               <br/>
+                       <button type="submit"  id="submit" name="Agent_Cpi"  
+                         class="btn btn-outline-secondary btn-sm">Remplir  </button>
+               <br/>
+           </div>
+       </form>
+
+
+
+
+
+
+
+
+
+{# *************************         AGENT FONCTION           ********************* #}
+
+ <form enctype="multipart/form-data" action="/agent/fonction" method="post">
+        <div class="input-row">
+            <label class="col-md-4 control-label"><br/> <br/> 
+               <strong> Agent_Fonction</strong>
+                remplissage <br/> {{compteurAgentFonction|length}} / 359
+                </label>
+               <br/><br/>
+
+               <input type="file" name="file[]" id="file" accept=".csv" multiple>
+
+               <br/>
+               <br/>
+        
+                 <button type="submit"  id="submit" name="agent_fonction"    class="btn btn-outline-secondary btn-sm"> Remplir  </button>
+               <br/>
+           </div>
+       </form>
+
+
+
+
+
+{# *************************              AGENT SERVICE        *************** #}
+
+<form enctype="multipart/form-data" action="/agent/service" method="post">
+        <div class="input-row">
+            <label class="col-md-4 control-label"><br/> <br/> 
+               <strong> Agent_Service</strong> 
+                remplissage <br/> {{compteurAgentService|length}} / 726
+               </label>
+               <br/><br/>
+               <input type="file" name="file[]" id="file" accept=".csv" multiple>
+               <br/>
+               <br/>
+     
+                 <button type="submit"  id="submit" name="Agent_Service"    class="btn btn-outline-secondary btn-sm"> Remplir  </button>
+               <br/>
+           </div>
+       </form>
+
+
+
+
+     {# *************************  BASE AGENT ************************  #}
+
+       <form enctype="multipart/form-data" action="/base/agent/adresse" method="post">
+        <div class="input-row">
+            <label class="col-md-4 control-label"><br/> <br/> 
+               <strong> Base_Agent_Adresse</strong>
+               remplissage  <br/>
+               {{compteurBaseAgentAdresse|length}} / 30 836
+                </label>
+               <br/><br/>
+               <input type="file" name="file[]" id="file" accept=".csv" multiple>
+               <br/>
+               <br/>
+                 <button type="submit"  id="submit" name="Base_Agent_Adresse"    class="btn btn-outline-secondary btn-sm"> Remplir  </button>
+               <br/>
+           </div>
+       </form>
+
+
+
+
+
+
+{# *************************           BTRTL            ******************** #}
+
+ <form enctype="multipart/form-data" action="/b/t/r/t/l" method="post">
+        <div class="input-row">
+            <label class="col-md-4 control-label"><br/> <br/> 
+               <strong> BTRTL</strong> 
+               remplissage 
+               <br/>   
+                {{compteurBTRTL|length}} / 26
+               </label>
+               <br/><br/>
+               <input type="file" name="file[]" id="file" accept=".csv" multiple>
+               <br/>
+               <br/>
+                    <button type="submit"  id="submit" name="BTRTL"    class="btn btn-outline-secondary btn-sm"> Remplir </button>
+               <br/>
+           </div>
+       </form>
+
+
+
+
+{# *************************  CATEGORIES            ********************  #}
+
+           <form enctype="multipart/form-data" action="/categories"" method="post">
+        <div class="input-row">
+            <label class="col-md-4 control-label"><br/> <br/> 
+               <strong> Categories</strong>
+                remplissage <br/> {{compteurCategories|length}} / 9
+                </label>
+               <br /><br />
+               <input type="file" name="file[]" id="file" accept=".csv" multiple>
+               <br />
+               <br />
+                         <button type="submit"  id="submit" name="categorie"    class="btn btn-outline-secondary btn-sm"> Remplir  </button>
+               <br />
+           </div>
+       </form>
+       
+
+
+
+       {# *************************  GRADE REPRESENTATION     ************************  #} 
+     
+       <form enctype="multipart/form-data" action="/grade/representation" method="post">
+        <div class="input-row">
+            <label class="col-md-4 control-label"><br/> <br/> 
+               <strong> Grade_representation</strong>
+                remplissage <br/> {{compteurGradeRepresentation|length}} / 78
+                </label>
+               <br/><br/>
+               <input type="file" name="file[]" id="file" accept=".csv" multiple>
+               <br/>
+               <br/>
+                 <button type="submit"  id="submit" name="grade_representation"    class="btn btn-outline-secondary btn-sm"> Remplir</button>
+               <br/>
+           </div>
+       </form>
+      
+
+
+
+
+
+         {# *************************  LOCALITE       *********************  #}
+
+           <form enctype="multipart/form-data" action="/localite" method="post">
+        <div class="input-row">
+            <label class="col-md-4 control-label"><br /> <br /> 
+               <strong>Localite</strong> 
+                  remplissage <br/> {{compteurLocalite|length}} / 2 825       
+               </label>
+               <br /><br />
+               <input type="file" name="file[]" id="file" accept=".csv" multiple>
+               <br />
+               <br />
+                     <button type="submit"  id="submit" name="localite"    class="btn btn-outline-secondary btn-sm"> Remplir </button>
+               <br />
+           </div>
+       </form>
+
+
+
+
+              {# *************************  MANDATS ******** #}
+
+         <form enctype="multipart/form-data" action="/mandats" method="post">
+        <div class="input-row">
+            <label class="col-md-4 control-label"><br/> <br/> 
+               <strong> Mandats</strong> 
+               remplissage <br/>{{compteurMandats|length}} / 74 908
+               </label>
+               <br/><br/>
+               <input type="file" name="file[]" id="file" accept=".csv" multiple>
+               <br/>
+               <br/>
+                      <button type="submit"  id="submit" name="Mandats"    class="btn btn-outline-secondary btn-sm"> Remplir  </button>
+               <br/>
+           </div>
+       </form>
+
+      
+
+
+
+          {# *************************  PATGS           *******************   #}
+
+        <form enctype="multipart/form-data" action="/p/a/t/g/s" method="post">
+        <div class="input-row">
+            <label class="col-md-4 control-label"><br/> <br/> 
+               <strong> PATGS</strong>
+                  remplissage <br/>{{compteurPATGS|length}} / 60
+                </label>
+               <br/><br/>
+               <input type="file" name="file[]" id="file" accept=".csv" multiple>
+               <br/>
+               <br/>
+                <button type="submit"  id="submit" name="PATGS"    class="btn btn-outline-secondary btn-sm"> Remplir </button>
+               <br/>
+           </div>
+       </form>
+
+     
+
+
+
+   {# *************************  TYPES MANDATS      *********************  #}
+       
+       <form enctype="multipart/form-data" action="/types/mandats" method="post">
+        <div class="input-row">
+            <label class="col-md-4 control-label"><br/> <br/> 
+               <strong> Types_mandats</strong>
+                remplissage <br/> {{compteurTypesMandats|length}} / 14
+                </label>
+               <br/><br/>
+               <input type="file" name="file[]" id="file" accept=".csv" multiple>
+               <br/>
+               <br/>
+               <button type="submit"  id="submit" name="Types_mandats"    class="btn btn-outline-secondary btn-sm"> Remplir </button>
+               <br/>
+           </div>
+       </form>
+
+
+
+
+
+
+  {# *************************  UNIT  **********************  #}
+
+       <form enctype="multipart/form-data" action="/unit" method="post">
+        <div class="input-row">
+            <label class="col-md-4 control-label"><br/> <br/> 
+               <strong> Unit</strong>
+                remplissage <br/> {{compteurUnit|length}} / 32
+                </label>
+               <br/><br/>
+               <input type="file" name="file[]" id="file" accept=".csv" multiple>
+               <br/>
+               <br/>
+             <button type="submit"  id="submit" name="Unit"    class="btn btn-outline-secondary btn-sm"> Remplir</button>
+               <br/>
+           </div>
+       </form>
+
+      
+
+
+
+
+       {# *************************  WERKS   ********************   #}
+       
+       <form enctype="multipart/form-data" action="/w/e/r/k/s" method="post">
+        <div class="input-row">
+            <label class="col-md-4 control-label"><br/> <br/> 
+               <strong> WERKS</strong>  remplissage <br/> {{compteurWERKS|length}} / 8
+                </label>
+               <br/><br/>
+               <input type="file" name="file[]" id="file" accept=".csv" multiple>
+               <br/>
+               <br/>
+                <button type="submit"  id="submit" name="WERKS"    class="btn btn-outline-secondary btn-sm"> Remplir  </button>
+               <br/>
+           </div>
+       </form>
+
+
+     
+</div>
+
+{% endblock %}
+
+
+

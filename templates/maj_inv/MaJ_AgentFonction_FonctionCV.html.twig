@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+<style>
+form
+{
+  margin : 5px;
+}
+</style>
+
+
+<div class="main">
+
+BDD_PERSO_ULB {{ AllAgentFonction | length  }} enregistrements
+</br>
+Inventaire {{ AllFonctioncAsc | length  }} enregistrements 
+</br>
+</br>
+
+
+{# ***********    BOUTON      MISE    A      JOUR      INVENTAIRE   **********#}
+    <form action="MaJ_AgentFonction_FonctionCV_REQUETE" method="post">
+             <input type="hidden" value="" name="Unit">
+             <button type="submit" name="Unit"  value="" class="btn btn-outline-success" btn-sm"
+             >  Mettre  &agrave; jour inventaire </button>
+             </form>
+
+
+  <form action="/excelFonctionCV" method="post">
+      <button formaction="excelFonctionCV" class="btn btn-outline-secondary btn-sm"> Exporter fonction CV-chercheurs </button>
+  </form>
+
+
+{# ********        AFFICHAGE        LISTE    AGENT FONCTION      *******#}
+<table class="table table-hover">
+ <th colspan="2">BDD_PERSO_ULB</th>
+<caption>   BDD_PERSO_ULB </caption
+  <tr>
+    <th> ZZGRADE </th>
+    <th> ZZGRADETXT </th>
+
+
+  </tr>
+
+     {% for AgentFonction in AllAgentFonction %}
+  <tr>
+
+  <td>{{  AgentFonction.ZZGRADE}}  </td>
+    <td>{{  AgentFonction.ZZGRADETXT}}  </td>
+  
+ </tr>
+ {%  endfor %}
+</table>
+
+
+
+
+
+
+
+{# ***********        AFFICHAGE        LISTE     fonction CV     **********#}
+
+<table class="table table-hover">
+<th colspan="2">Inventaire</th>
+<caption>   Inventaire </caption
+  <tr>
+    <th> idFonction </th>
+    <th> Libelle Fonction </th>
+
+  </tr>
+
+     {% for fonction in AllFonctioncAsc %}
+  <tr>
+
+  <td>{{  fonction.idFonction}}  </td>
+    <td>{{  fonction.LibelleDuFonction}}  </td>
+  
+ </tr>
+ {%  endfor %}
+</table>
+
+
+
+
+
+
+</div>
+{% endblock %}

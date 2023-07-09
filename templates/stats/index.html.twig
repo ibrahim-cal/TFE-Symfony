@@ -1,0 +1,275 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello StatsController!{% endblock %}
+
+{% block body %}
+<style>
+
+form
+{
+	padding : 15px;
+}
+
+.h4
+{
+color : #054886;
+}
+
+</style>
+
+<div class="main">
+
+
+<form action="/statsPDF" method="post">
+<div class="input-group">
+
+  
+  <button formaction="/statsPDF" class="btn btn-outline-secondary btn-sm"> Générer PDF des résultats </button>
+
+</div>
+</form>
+
+
+
+
+<p class="h4">Statistiques de la table Base_Agent_Adresse : </p>
+
+<table class="table table-hover">
+
+<tr>
+<th> Nombre d'agents </th>
+<td>    30 836   </td>
+</tr>
+
+<tr>
+<th>    Nombre de prénoms non renseignés</th>
+<td>  27    </td>
+</tr>
+
+
+<tr>
+<th>    Nombre de prénoms renseignés  </th>
+<td>   30 809 </td>
+</tr>
+
+<tr>
+<th>      Nombre de prénoms préférentiels non renseignés      </th>
+<td>   30 678  </td>
+</tr>
+
+
+<tr>
+<th>     Nombre de prénoms préférentiels renseignés           </th>
+<td>   158 </td>
+</tr>
+
+
+<tr>
+<th>     Nombre de noms non renseignés          </th>
+<td>  0  </td>
+</tr>
+
+<tr>
+<th>        Nombre de noms renseignés       </th>
+<td>   30 836 </td
+</tr>
+
+<tr>
+<th>           Nombre de noms préférentiels non renseignés     </th>
+<td>  30 647  </td>
+</tr>
+
+<tr>
+<th>           Nombre de noms préférentiels renseignés    </th>
+<td>  189  </td>
+</tr>
+
+
+<tr>
+<th>   Nombre de personnes avec un diplôme de doctorat   </th>
+<td>  4 030</td>
+</tr>
+
+
+</table>
+
+
+
+
+
+<p class="h4"> Statistiques de la table Mandats </p>
+<p> Nombre de mandats 75 615  </p>
+
+<table class="table table-hover">
+
+
+
+<tr>
+ <th colspan="2"> Domaines</th>
+<caption>   </caption
+<td>    </td>
+</tr>
+
+<tr>
+<th>   Hôpital universitaire des Enfants Reine Fabiola  </th>
+<td> 124   </td>
+</tr>
+
+
+
+<tr>
+<th>    Hôpital Bordet </th>
+<td>   132  </td>
+</tr>
+
+<tr>
+<th>      Hôpital St Pierre     </th>
+<td>   241</td>
+</tr>
+
+
+<tr>
+<th>     Hôpital Brugman          </th>
+<td>  458 </td>
+</tr>
+
+
+<tr>
+<th>    Hôpital Erasme        </th>
+<td> 753  </td>
+</tr>
+
+<tr>
+<th>     institution de retraite professionnelle       </th>
+<td>   812</td
+</tr>
+
+<tr>
+<th>     Fonds National de la Recherche Scientifique   </th>
+<td>  3682  </td>
+</tr>
+
+<tr>
+<th>     Université Libre de Bruxelles   </th>
+<td>   68914  </td>
+</tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+<p class="h4"> </p>
+
+<table class="table table-hover">
+
+<tr>
+ <th colspan="2"> Types de contrats </th>
+<caption>   </caption
+<td>    </td>
+</tr>
+
+<tr>
+<th>    Mdt définitif  </th>
+<td>   6232   </td>
+</tr>
+
+
+
+<tr>
+<th>    CDI Stat équiv </th>
+<td>    4608 </td>
+</tr>
+
+<tr>
+<th>     CDI Contractuel    </th>
+<td> 4811  </td>
+</tr>
+
+
+
+<tr>
+<th>   CDI remplacmnt   </th>
+<td>    1485   </td>
+</tr>
+
+<tr>
+<th>   Mdt indéterminé    </th>
+<td>     60 </td
+</tr>
+
+
+
+<tr>
+<th>   Temp durée ind. </th>
+<td>    30     </td>
+</tr>
+
+
+
+<tr>
+<th>  Durée illimitée </th>
+<td>    2473    </td>
+</tr>
+
+
+<tr>
+<th>   Mdt temporaire   </th>
+<td>    19100    </td>
+</tr>
+
+
+
+<tr>
+<th>   Mdt intérimaire </th>
+<td>     8925   </td>
+</tr>
+
+
+
+<tr>
+<th>  CDD</th>
+<td>    8678     </td>
+</tr>
+
+
+
+
+<tr>
+<th>  CDD remplacmnt  </th>
+<td>     255   </td>
+</tr>
+
+
+
+<tr>
+<th>  Temp durée dét.  </th>
+<td>    60     </td>
+</tr>
+
+
+
+<tr>
+<th>  Durée limitée </th>
+<td>   17363     </td>
+</tr>
+
+
+
+<tr>
+<th> Mandat IRP  </th>
+<td>     828   </td>
+</tr>
+
+
+</table>
+
+
+</div>
+</div>
+{% endblock %}

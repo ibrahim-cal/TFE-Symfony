@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} ULB   {% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+
+
+.sidenav {
+  height: 100%;
+  width: 150px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #14396E;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main{
+  margin-left: 160px; /* Same as the width of the sidenav */
+  margin-top : 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+
+td, th {
+width: 5%;
+}
+
+
+
+
+
+</style>
+
+
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+
+
+
+
+<div class="sidenav">
+  <a href="/import"> Accueil </a>
+  <a href="/chercheur"> Chercheurs </a>
+  
+  <a href="/mandats/form"> Mandats </a>
+  <a href="/patgsListe"> PATGS </a>
+  <a href="/covid"> Covid-19 </a>
+</div>
+
+
+<div class="main">
+
+
+
+
+{%    if MandatByByType_Categorie is empty  %}
+Aucun mandat trouvé pour les critères : {{CatSelectionne}}  - {{TypeSelectionne}}
+
+ {% else %}
+
+Critères sélectionnés : {{CatSelectionne}}  - {{TypeSelectionne}}
+</br>
+Nombre d'enregistrement {{MandatByByType_Categorie|length}}
+</br>
+
+
+
+
+<table class="table table-hover">
+  <tr>
+
+    <th> Num Mandat</th>
+     <th>Matricule</th>
+      <th> Domaine </th>
+       <th> Sous-domaine </th>
+           <th> Type mandat </th>
+           <th> Date fin contrat </th>
+  </tr>
+
+{% for MandatType_Categorie in MandatByByType_Categorie %}
+  <tr>
+
+    <td>    {{  MandatType_Categorie.PERNR}}    </td>
+    <td>    {{  MandatType_Categorie.FkPERSONIDEXT}}    </td>
+     <td>    {{  MandatType_Categorie.FkWERKS}}    </td>
+      <td>    {{  MandatType_Categorie.FkBTRTL}}    </td>
+        <td>    {{  MandatType_Categorie.FkANSVH}}    </td>
+         <td>    {{  MandatType_Categorie.PA0016CTEDT|date('d-m-Y') }} 
+
+ 
+   {%  endfor %}
+ </tr>
+</table>
+
+
+ {%    endif    %}
+
+
+</div>
+</div>
+{% endblock %}
